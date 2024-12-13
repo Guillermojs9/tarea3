@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Switch } from 'react-native';
 import { Group } from './Group';
 import { RiegoData } from './riegoData';
 import { riegoMapper } from './riegoMapper';
@@ -31,18 +31,20 @@ export default function App() {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <View style={styles.groupContainer}>
-            {/* Título del grupo */}
             <Text style={styles.groupTitle}>{item.name}</Text>
             <Text style={styles.lastDateText}>{item.lastDate}</Text>
-
-            {/* Mostrar las válvulas de cada grupo */}
             <FlatList
               data={item.valvulas}
               keyExtractor={(valvula, index) => index.toString()}
               renderItem={({ item: valvula }) => (
                 <View style={styles.valvulaContainer}>
                   <Text style={styles.valvulaText}>Nombre: {valvula.nombre}</Text>
-                  <Text style={styles.valvulaText}>Estado: {valvula.estado ? "Activo" : "Inactivo"}</Text>
+                  <Text style={styles.valvulaText}>Estado: {valvula.estado}</Text>
+                  <Switch
+                    value={valvula.estado}
+                    onValueChange={() => { }}
+                    style={styles.switch}
+                  />
                 </View>
               )}
             />
@@ -93,5 +95,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
     marginBottom: 5,
+  },
+  switch: {
+    marginLeft: 10,
   },
 });
