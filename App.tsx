@@ -30,16 +30,19 @@ export default function App() {
         data={groups}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <View style={{ marginBottom: 20 }}>
+          <View style={styles.groupContainer}>
+            {/* Título del grupo */}
             <Text style={styles.groupTitle}>{item.name}</Text>
-            <Text>{item.lastDate}</Text>
+            <Text style={styles.lastDateText}>{item.lastDate}</Text>
+
+            {/* Mostrar las válvulas de cada grupo */}
             <FlatList
               data={item.valvulas}
               keyExtractor={(valvula, index) => index.toString()}
               renderItem={({ item: valvula }) => (
                 <View style={styles.valvulaContainer}>
                   <Text style={styles.valvulaText}>Nombre: {valvula.nombre}</Text>
-                  <Text style={styles.valvulaText}>Estado: {valvula.estado}</Text>
+                  <Text style={styles.valvulaText}>Estado: {valvula.estado ? "Activo" : "Inactivo"}</Text>
                 </View>
               )}
             />
@@ -54,20 +57,41 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+    backgroundColor: '#f8f8f8',
+    paddingTop: 20,
+    paddingHorizontal: 20,
+  },
+  groupContainer: {
+    backgroundColor: '#ffffff',
+    marginBottom: 20,
+    padding: 15,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 5,
   },
   groupTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 5,
+  },
+  lastDateText: {
+    fontSize: 16,
+    color: '#777',
+    marginBottom: 10,
   },
   valvulaContainer: {
-    marginTop: 10,
-    paddingLeft: 10,
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 10,
   },
   valvulaText: {
     fontSize: 16,
+    color: '#333',
+    marginBottom: 5,
   },
 });
