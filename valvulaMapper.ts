@@ -1,4 +1,4 @@
-import { Value } from "./riegoData";
+import { Value } from "./src/interface/riegoData";
 import { Valvula } from "./Valvula";
 
 export const valvulaMapper = (items: Value[]): Valvula[] => {

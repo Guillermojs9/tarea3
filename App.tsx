@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, Switch } from 'react-native';
-import { Group } from './Group';
-import { RiegoData } from './riegoData';
-import { riegoMapper } from './riegoMapper';
+import { RiegoData } from './src/interface/riegoData';
+import { riegoMapper } from './src/mapper/riegoMapper';
 import { useState, useEffect } from 'react';
+import { Group } from './src/interface/riegoDataLocal';
+import { useGroups } from './src/hooks/useGroups';
 
 async function getGroups(): Promise<Group[]> {
   const response = await fetch("http://192.168.1.136:3000/items");
@@ -14,16 +15,7 @@ async function getGroups(): Promise<Group[]> {
 }
 
 export default function App() {
-  const [groups, setGroups] = useState<Group[]>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getGroups();
-      setGroups(data);
-    };
-
-    fetchData();
-  }, []);
-
+  const { groups } = useGroups();
   return (
     <View style={styles.container}>
       <FlatList

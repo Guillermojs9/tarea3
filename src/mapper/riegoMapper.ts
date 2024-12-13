@@ -1,6 +1,6 @@
-import { Group } from "./Group";
-import { RiegoData } from "./riegoData";
-import { valvulaMapper } from "./valvulaMapper";
+import { RiegoData } from "../interface/riegoData";
+import { valvulaMapper } from "../../valvulaMapper";
+import { Group } from "../interface/riegoDataLocal";
 
 export const riegoMapper = (item: RiegoData): Group => {
     return {
